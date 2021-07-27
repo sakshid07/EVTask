@@ -32,7 +32,7 @@ require('connection.php');
 
     <form action="" method="POST">
         <legend>
-            <input type="text" name="email" placeholder="Email" id="infield"><br><br>
+            <input type="text" name="username" placeholder="Username" id="infield" ><br><br>
 
             <input type="password" name="pass" placeholder="Password" id="infield"><br><br>
 
@@ -45,30 +45,30 @@ require('connection.php');
     <?php  
 if(isset($_POST["submit"])){  
   
-if(!empty($_POST['email']) && !empty($_POST['pass'])) {  
-    $email=$_POST['email'];  
+if(!empty($_POST['username']) && !empty($_POST['pass'])) {  
+    $username=$_POST['username'];  
     $pass=$_POST['pass'];  
   
     // $con=mysqli_connect('localhost','root','') or die(mysqli_error());  
     // mysqli_select_db($con,'user-registration') or die("cannot select DB");  
   
-    $query=mysqli_query($dbconnect,"SELECT * FROM users WHERE email='".$email."' AND password='".$pass."'");  
+    $query=mysqli_query($dbconnect,"SELECT * FROM users WHERE username='".$username."' AND password='".$pass."'");  
     $numrows=mysqli_num_rows($query);  
     if($numrows!=0)  
     {  
     while($row=mysqli_fetch_assoc($query))  
     {  
-    $dbusername=$row['email'];  
+    $dbusername=$row['username'];  
     $dbpassword=$row['password'];  
     }  
   
-    if($email == $dbusername && $pass == $dbpassword)  
+    if($username == $dbusername && $pass == $dbpassword)  
     {  
     session_start();  
-    $_SESSION['email']=$email; 
+    $_SESSION['username']=$username; 
      
     echo " Logged in!";
-    echo "$email"; 
+    echo "$username"; 
     /* Redirect browser */  
     header("Location: homepage.php");  
     }  

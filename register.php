@@ -35,7 +35,7 @@ require('connection.php');
         <legend>
 
             
-            <input type="text" name="email" placeholder="Username" id="infield"><br><br>
+            <input type="text" name="username" placeholder="Username" id="infield"><br><br>
             <input type="password" name="pass" placeholder="Password" id="infield"><br><br>
 
 
@@ -47,8 +47,8 @@ require('connection.php');
     </form>
     <?php  
 if(isset($_POST["submit"])){  
-if(!empty($_POST['email']) && !empty($_POST['pass'])) {  
-$email=$_POST['email'];  
+if(!empty($_POST['username']) && !empty($_POST['pass'])) {  
+$username=$_POST['username'];  
 $pass=$_POST['pass'];  
 
 
@@ -56,7 +56,7 @@ $uppercase = preg_match('@[A-Z]@', $pass);
 $lowercase = preg_match('@[a-z]@', $pass);
 $number    = preg_match('@[0-9]@', $pass);
 $specialChars = preg_match('@[^\w]@', $pass);
-if (strlen($email) < 6 || strlen($email) > 12 ) {
+if (strlen($username) < 6 || strlen($username) > 12 ) {
     
     echo 'Username should be of length 6-12';
     echo "<br>";
@@ -67,14 +67,14 @@ if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pass) < 8
     echo "<br>";
 }
 
-if ($uppercase && $lowercase && $number && $specialChars && strlen($pass) > 6 && strlen($email) > 6 && strlen($email) < 12 ){
+if ($uppercase && $lowercase && $number && $specialChars && strlen($pass) > 6 && strlen($username) > 6 && strlen($username) < 12 ){
 
     echo "<br>";
-    $query=mysqli_query($dbconnect,"SELECT * FROM users WHERE email='".$email."'");  
+    $query=mysqli_query($dbconnect,"SELECT * FROM users WHERE username='".$username."'");  
     $numrows=mysqli_num_rows($query);  
     if($numrows==0)  
     {  
-    $sql="INSERT INTO users(email,password) VALUES('$email','$pass')";  
+    $sql="INSERT INTO users(username,password) VALUES('$username','$pass')";  
   
     $result=mysqli_query($dbconnect,$sql);  
         if($result){  
